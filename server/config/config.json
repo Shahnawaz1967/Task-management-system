@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "default",
+    "password": "8TSfjhdNEXY7",
+    "database":"verceldb",
+    "host": "ep-calm-fire-a12pdd6r-pooler.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username":"default",
+    "password": "8TSfjhdNEXY7",
+    "database": "verceldb",
+    "host": "ep-calm-fire-a12pdd6r-pooler.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "default",
+    "password": "8TSfjhdNEXY7",
+    "database": "verceldb",
+    "host": "ep-calm-fire-a12pdd6r-pooler.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres"
+  }
+}
