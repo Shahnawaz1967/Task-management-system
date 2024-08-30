@@ -1,5 +1,4 @@
-// src/context/AuthContext.tsx
-import React, { createContext, useContext, useState, useEffect, PropsWithChildren } from "react";
+import { createContext, useContext, useState, useEffect, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
 type AuthContextType = {
@@ -10,7 +9,7 @@ type AuthContextType = {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC = ({ children }:PropsWithChildren) => {
+export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   const navigate = useNavigate();
 
