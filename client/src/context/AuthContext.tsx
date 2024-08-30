@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 type AuthContextType = {
   isAuthenticated: boolean;
+  loading: boolean;
   login: (token: string) => void;
   logout: () => void;
 };
@@ -11,19 +12,26 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    const checkAuth = async () => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        // Optionally: Validate token with server or decode it
+        setIsAuthenticated(true);
+      }
+      setLoading(false);
+    };
+    
+    checkAuth();
   }, []);
 
   const login = (token: string) => {
     localStorage.setItem("token", token);
     setIsAuthenticated(true);
-    location.href="/"
+    navigate("/");
   };
 
   const logout = () => {
@@ -33,7 +41,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, loading, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
