@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { EyeIcon, EyeOffIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
 import { SERVER_URL } from "@/lib/constants"
+import { useAuth } from "@/context/AuthContext"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -13,6 +14,8 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [errors, setErrors] = useState({ email: "", password: "" })
   const navigate = useNavigate()
+
+  const {login}= useAuth();
 
   const validateForm = () => {
     let isValid = true
@@ -53,8 +56,7 @@ export default function Login() {
         if (response.ok) {
           const data = await response.json()
           // Handle storing the token and navigating
-          localStorage.setItem("token", data.token)
-          navigate("/")
+          login(data.token)
         } else {
           console.error("Login failed")
         }
