@@ -3,22 +3,23 @@ import TaskManager from "./components/TaskManager";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import App from "./App";
-import ProtectedRoute from "./components/ProtectedRoute"; // Ensure this is imported
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
     element: <App />,
     children: [
       {
-        path: "/",
-        element: (
-          <ProtectedRoute>
-            <TaskManager />
-          </ProtectedRoute>
-        ),
+        element: <ProtectedRoute />,
+        children: [
+          {
+            path: "/",
+            element: <TaskManager />,
+          },
+        ],
       },
       {
-        path: "/register",  // Corrected the spelling
+        path: "/register", // Corrected the spelling
         element: <Register />,
       },
       {
