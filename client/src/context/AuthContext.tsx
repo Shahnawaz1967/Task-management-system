@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   const login = (token: string) => {
     localStorage.setItem("token", token);
     setIsAuthenticated(true);
-    navigate("/");
+    location.href="/"
   };
 
   const logout = () => {
