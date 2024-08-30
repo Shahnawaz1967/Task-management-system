@@ -6,20 +6,20 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
+import { SERVER_URL } from "@/lib/constants"
+import { useNavigate } from "react-router-dom"
 
-
-export default function Registor() {
+export default function Register() {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-  const [errors, setErrors] = useState({ name: "", email: "", password: "", confirmPassword: "" })
+  const [errors, setErrors] = useState({ name: "", email: "", password: "" })
+  const navigate =useNavigate();
 
   const validateForm = () => {
     let isValid = true
-    const newErrors = { name: "", email: "", password: "", confirmPassword: "" }
+    const newErrors = { name: "", email: "", password: "" }
 
     if (!name.trim()) {
       newErrors.name = "Name is required"
@@ -42,20 +42,30 @@ export default function Registor() {
       isValid = false
     }
 
-    if (password !== confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match"
-      isValid = false
-    }
-
     setErrors(newErrors)
     return isValid
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (validateForm()) {
-      // Here you would typically send the registration request to your server
-      console.log("Registration attempt with:", { name, email, password })
+      try {
+        const response = await fetch(`${SERVER_URL}/auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({username:name, email, password }),
+        })
+
+        if (response.ok) {
+          navigate("/login")
+        } else {
+          console.error("Login failed")
+        }
+      } catch (error) {
+        console.error("Error during login:", error)
+      }
     }
   }
 
@@ -116,31 +126,6 @@ export default function Registor() {
                   </Button>
                 </div>
                 {errors.password && <p className="text-sm text-red-500">{errors.password}</p>}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm Password</Label>
-                <div className="relative">
-                  <Input
-                    id="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                  />
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOffIcon className="h-4 w-4 text-gray-500" />
-                    ) : (
-                      <EyeIcon className="h-4 w-4 text-gray-500" />
-                    )}
-                  </Button>
-                </div>
-                {errors.confirmPassword && <p className="text-sm text-red-500">{errors.confirmPassword}</p>}
               </div>
             </div>
             <Button className="w-full mt-6" type="submit">

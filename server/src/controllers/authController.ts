@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 
 import bcrypt from 'bcryptjs';
-import { generateToken } from '../utils/jwt';
-import prisma from '../lib/db';
+import { generateToken } from '../utils/jwt.js';
+import prisma from '../lib/db.js';
 
 
 

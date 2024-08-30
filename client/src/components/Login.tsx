@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { EyeIcon, EyeOffIcon } from "lucide-react"
 import { useNavigate } from "react-router-dom"
+import { SERVER_URL } from "@/lib/constants"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -41,7 +42,7 @@ export default function Login() {
     e.preventDefault()
     if (validateForm()) {
       try {
-        const response = await fetch("/api/login", {
+        const response = await fetch(`${SERVER_URL}/auth/login`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -123,7 +124,7 @@ export default function Login() {
           </a>
           <div className="text-sm text-center text-gray-500">
             Don&apos;t have an account?{" "}
-            <a href="/Registor" className="text-blue-500 hover:underline">
+            <a href="/register" className="text-blue-500 hover:underline">
             Register
             </a>
           </div>

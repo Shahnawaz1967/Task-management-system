@@ -1,20 +1,19 @@
 import { Request, Response } from 'express';
-import prisma from '../lib/db';
+import prisma from '../lib/db.js';
 
 
 
 
 // Create a new task
 export const createTask = async (req: Request, res: Response) => {
-    const { title, description, status, dueDate } = req.body;
-    const userId = parseInt(req.user!.id, 10);  // Convert userId to integer
+    const { title, description, dueDate } = req.body;
+    const userId = parseInt(req.user!.id);  // Convert userId to integer
   
     try {
       const task = await prisma.task.create({
         data: {
           title,
           description,
-          status,
           dueDate: dueDate ? new Date(dueDate) : null,
           userId,  // Ensure this is an integer
         },
@@ -28,7 +27,8 @@ export const createTask = async (req: Request, res: Response) => {
 
 // Get all tasks for the logged-in user
 export const getTasks = async (req: Request, res: Response) => {
-  const userId = req.user!.id;
+  const userId =parseInt (req.user!.id);
+  console.log(userId,typeof userId)
 
   try {
     const tasks = await prisma.task.findMany({

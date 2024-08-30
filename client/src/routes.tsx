@@ -1,8 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import TaskManager from "./components/TaskManager";
-import Registor from "./components/Registor";
+import Register from "./components/Register";
 import Login from "./components/Login";
 import App from "./App";
+import ProtectedRoute from "./components/ProtectedRoute"; // Ensure this is imported
 
 const router = createBrowserRouter([
   {
@@ -10,11 +11,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <TaskManager />,
+        element: (
+          <ProtectedRoute>
+            <TaskManager />
+          </ProtectedRoute>
+        ),
       },
       {
-        path: "/registor",
-        element: <Registor />,
+        path: "/register",  // Corrected the spelling
+        element: <Register />,
       },
       {
         path: "/login",
@@ -23,4 +28,5 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 export default router;

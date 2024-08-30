@@ -1,13 +1,14 @@
-// import Login from "./components/Login";
-// import TaskManager from "./components/TaskManager";
-
 import { Outlet } from "react-router-dom";
-
+import Navbar from "./components/Navbar";
+import { AuthProvider } from "./context/AuthContext";
 
 export default function App() {
   return (
     <>
-      <Outlet />
+      <AuthProvider>
+        <Navbar />
+        <Outlet />
+      </AuthProvider>
     </>
   );
 }
