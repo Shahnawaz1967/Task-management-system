@@ -30,7 +30,7 @@ export default function Login() {
       newErrors.password = "Password is required"
       isValid = false
     } else if (password.length < 5) {
-      newErrors.password = "Password must be at least 6 characters"
+      newErrors.password = "Password must be at least 5 characters"
       isValid = false
     }
 
