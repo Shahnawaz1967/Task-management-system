@@ -24,6 +24,9 @@ Deployment: Hosted on Vercel
 
 # Task Manager Page
 
+![Task manager](https://github.com/user-attachments/assets/3e2a96d9-d66f-4af8-9c22-9400bf3ed739)
+
+
 ![users data postgres vercel](https://github.com/user-attachments/assets/630697a5-42ce-4312-9df3-1c7e0c3c86ff)
 
 
