@@ -56,8 +56,7 @@ npm i
 
 npm run dev
 # Links of project:
-1)FrontEnd Deployment Link : https://task-management-system-client-wine.vercel.app/login
-
+1)FrontEnd Deployment Link : https://task-management-system-cqos.vercel.app/login
 2)BackEnd deployment Link  : https://task-management-system-hazel-phi.vercel.app/
 
 3)Github repo Link :
